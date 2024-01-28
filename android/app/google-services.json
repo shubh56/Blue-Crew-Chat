@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "127943714715",
+    "project_id": "blue-crew-chat",
+    "storage_bucket": "blue-crew-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127943714715:android:8b17ce807c7d1e003fa33e",
+        "android_client_info": {
+          "package_name": "com.example.blue_crew_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1raSOuAs7bp8dPi3h34c9xM062vBatJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
