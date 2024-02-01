@@ -87,8 +87,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(kOxBlue),
                 ),
-                onPressed: () {
-                  Auth.signOutFromGoogle();
+                onPressed: () async {
+                  await Auth.signOutFromGoogle().then((value) => Get.offAndToNamed('/LogInScreen'));
                 },
                 child: Row(
                   children: [

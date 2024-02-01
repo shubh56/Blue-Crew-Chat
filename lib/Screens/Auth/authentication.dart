@@ -4,14 +4,18 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import '../../models/chat-user.dart';
 import '../../models/message.dart';
+import 'dart:io';
+
 
 class Auth {
   static FirebaseAuth authInstance = FirebaseAuth.instance;
 
   static FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
+  static FirebaseStorage storageInstance = FirebaseStorage.instance;
 
   static Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -27,7 +31,7 @@ class Auth {
     return userCred;
   }
 
-  static signOutFromGoogle() async {
+  static Future<void> signOutFromGoogle() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
   }
@@ -69,6 +73,12 @@ class Auth {
         .snapshots();
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsersImage() {
+    return Auth.firestoreInstance
+        .collection('users')
+        .snapshots();
+  }
+
   static late ChatUser me;
 
   static Future<void> getSelfInfo() async {
@@ -84,6 +94,17 @@ class Auth {
       }
     });
   }
+  static Future<void> checkPatient() async {
+    await firestoreInstance
+        .collection('users')
+        .doc(userInstance.uid)
+        .get()
+        .then((user) async {
+        if(user.data()?['email']=='shubhharde158@gmail.com'){
+          print('true');
+        }else{print('false');}
+    });
+  }
 
   static String getConversationID(String id) =>
       userInstance.uid.hashCode <= id.hashCode
@@ -96,6 +117,8 @@ class Auth {
         .collection('chats/${getConversationID(user.id)}/messages/')
         .snapshots();
   }
+
+
 
   static Future<void> sendMessage(ChatUser user, String msg) async {
     final time = DateTime.now().millisecondsSinceEpoch.toString();
@@ -124,4 +147,14 @@ class Auth {
       'push_token': me.pushToken,
     });
   }
+
+  static Future<void> uploadToStorage(pickedFile) async{
+    final file = File(pickedFile!.path!);
+    final path = '${userInstance.email.toString()}/${pickedFile!.name}';
+    final ref = FirebaseStorage.instance.ref().child(path);
+    ref.putFile(file);
+  }
+
+
+
 }

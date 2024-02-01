@@ -46,6 +46,12 @@ dependencies:
   cached_network_image: ^3.3.1
   emoji_picker_flutter: ^1.6.4
   firebase_messaging: ^14.7.10
+  curved_navigation_bar: ^1.0.3
+  file_picker: ^5.5.0
+  camera: ^0.10.5+4
+  firebase_storage: ^11.6.0
+  image_picker: ^1.0.7
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_test:
@@ -72,7 +78,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - images/
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -85,10 +90,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+     - family: WorkSans
+       fonts:
+         - asset: fonts/WorkSans.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
